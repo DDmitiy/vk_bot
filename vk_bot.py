@@ -42,6 +42,7 @@ if __name__ == '__main__':
 
 	user_session = vk_api.VkApi(os.environ['LOGIN'], os.environ['PASS'])
 	user_vk = user_session.get_api()
+	user_session.auth()
 	upload_tool = vk_api.VkUpload(user_session)
 
 	longpolling(upload_tool)
