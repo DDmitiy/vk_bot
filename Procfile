@@ -1,1 +1,1 @@
-web: python vk_bot.py
+web: python vk_bot.py -p $PORT
