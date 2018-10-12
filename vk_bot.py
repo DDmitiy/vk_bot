@@ -26,14 +26,15 @@ def longpolling():
 					continue
 				api.messages.send(user_id=action[3], message=action[5], v=api_version)
 				arguments = {"keywords":action[5],"limit":1,"print_urls":True}
-				google_images_download.googleimagesdownload().download(arguments)
+				urls = google_images_download.googleimagesdownload().download(arguments)
 				print(action)
+				print(urls)
+
 
 
 if __name__ == '__main__':
 	session = vk.Session(access_token=os.environ['SECRET_KEY'])
 	api = vk.API(session)
 	api_version = 5.85
-	long_poll_info = api.messages.getLongPollServer(v=api_version)
 
 	longpolling()
