@@ -28,8 +28,10 @@ def longpolling(upload_tool):
 				urls = google_images_download.googleimagesdownload().download(arguments)
 				print(action)
 				print(urls)
-				pic_url = urls[action[5]][0]
-				api.messages.send(user_id=action[3], message=pic_url, v=api_version)
+				pic_path = urls[action[5]][0]
+				vk_pic_url = upload_tool.document(pic_path)[0]['url']
+				api.messages.send(user_id=action[3], message=vk_pic_url, v=api_version)
+				os.remove(pic_path)
 
 
 if __name__ == '__main__':
