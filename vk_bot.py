@@ -4,7 +4,7 @@ from google_images_download import google_images_download
 import json
 import os
 
-def longpolling():
+def longpolling(upload_tool):
 	while True:
 		long_poll_info = api.messages.getLongPollServer(v=api_version)
 		response = requests.post(
@@ -24,12 +24,12 @@ def longpolling():
 				print(action)
 				if len(action) <= 4 or action[6].get('from_admin'):
 					continue
-				api.messages.send(user_id=action[3], message=action[5], v=api_version)
 				arguments = {"keywords":action[5],"limit":1,"print_urls":True}
 				urls = google_images_download.googleimagesdownload().download(arguments)
 				print(action)
 				print(urls)
-
+				pic_url = urls[action[5]][0]
+				api.messages.send(user_id=action[3], message=pic_url, v=api_version)
 
 
 if __name__ == '__main__':
@@ -37,4 +37,8 @@ if __name__ == '__main__':
 	api = vk.API(session)
 	api_version = 5.85
 
-	longpolling()
+	vk_session = vk_api.VkApi(os.environ['LOGIN'], os.environ['PASS'])
+    vk = vk_session.get_api()
+    upload_tool = vk_api.VkUpload(vk_session)
+
+	longpolling(upload_tool)
