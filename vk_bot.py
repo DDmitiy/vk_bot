@@ -1,4 +1,5 @@
 import vk
+import vk_api
 import requests
 from google_images_download import google_images_download
 import json
