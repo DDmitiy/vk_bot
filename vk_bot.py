@@ -31,7 +31,7 @@ def longpolling(upload_tool):
 				print(urls)
 				pic_path = urls[action[5]][0]
 				vk_pic_url = upload_tool.document(pic_path)[0]
-				api.messages.send(user_id=action[3], message=vk_pic_url['url'], v=api_version, attachment='doc{}_{}'.format(vk_pic_url['38175660'], vk_pic_url['id']))
+				api.messages.send(user_id=action[3], message=vk_pic_url['url'], v=api_version, attachment='doc{}_{}'.format(vk_pic_url['owner_id'], vk_pic_url['id']))
 				os.remove(pic_path)
 
 
